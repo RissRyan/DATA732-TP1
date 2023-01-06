@@ -125,6 +125,95 @@ async function createDataViz() {
         .x(d3.scaleLinear().domain([0,100]))
         .y(d3.scaleLinear().domain([0,24]))
 
+    
+    /* ===== DEPRESSION EN FONCTION DE L'AGE - ROW CHART ===== */
+    
+    const AgeDimension = ndx.dimension(function (d) {
+        return d["Age"];
+    });
+
+    const depressionLevelGroup = AgeDimension.group().reduce(reduceAddDepression, reduceRemoveDepression, reduceInitialDepression);
+
+    function reduceAddDepression(p, v) {
+      ++p.count;
+      p.total += v["Depression"];
+      return p;
+    }
+    
+    function reduceRemoveDepression(p, v) {
+      --p.count;
+      p.total -= v["Depression"];
+      return p;
+    }
+    
+    function reduceInitialDepression() {
+      return {count: 0, total: 0};
+    }
+
+
+    // On crée le graphique avec le groupName
+    const depressionLevelChart = new dc.BarChart("#depressionLevelChart", groupName)
+        .dimension(AgeDimension) // On ajoute la dimension
+        .group(depressionLevelGroup) // On ajoute le groupe
+        .ordinalColors(["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"])
+        .elasticX(true) // On veut que l'axe des X puisse redimensionner tout seul
+        .ordering(function (p) { // On veut trier par valeur croissante
+            return -p.value;
+        })
+        .valueAccessor(function(p) { return p.value.count > 0 ? p.value.total / p.value.count : 0; })
+        .x(d3.scaleLinear().domain([0, 100]))
+        .y(d3.scaleLinear().domain([0, 25]))
+        ;
+
+    // On veut mettre 4 ticks pour l'axe des X
+    depressionLevelChart.xAxis().ticks(4)
+
+    /* ===== FIN DEPRESSION EN FONCTION DE L'AGE - ROW CHART ===== */
+
+
+    /* ===== ANXIETY EN FONCTION DE L'AGE - ROW CHART ===== */
+
+    const anxietyLevelGroup = AgeDimension.group().reduce(reduceAddAnxiety, reduceRemoveAnxiety, reduceInitialAnxiety);
+
+    function reduceAddAnxiety(p, v) {
+      ++p.count;
+      p.total += v["Anxiety"];
+      return p;
+    }
+    
+    function reduceRemoveAnxiety(p, v) {
+      --p.count;
+      p.total -= v["Anxiety"];
+      return p;
+    }
+    
+    function reduceInitialAnxiety() {
+      return {count: 0, total: 0};
+    }
+
+
+    // On crée le graphique avec le groupName
+    const anxietyLevelChart = new dc.BarChart("#anxietyLevelChart", groupName)
+        .dimension(AgeDimension) // On ajoute la dimension
+        .group(anxietyLevelGroup) // On ajoute le groupe
+        .ordinalColors(["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"])
+        .elasticX(true) // On veut que l'axe des X puisse redimensionner tout seul
+        .ordering(function (p) { // On veut trier par valeur croissante
+            return -p.value;
+        })
+        .valueAccessor(function(p) { return p.value.count > 0 ? p.value.total / p.value.count : 0; })
+        .x(d3.scaleLinear().domain([0, 100]))
+        .y(d3.scaleLinear().domain([0, 25]))
+        ;
+
+    // On veut mettre 4 ticks pour l'axe des X
+    depressionLevelChart.xAxis().ticks(4)
+
+    /* ===== FIN DEPRESSION EN FONCTION DE L'AGE - ROW CHART ===== */
+
+
+
+
     // On veut rendre tous les graphiques qui proviennent du chart group "dataset"
     dc.renderAll(groupName);
 }
