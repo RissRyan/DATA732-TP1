@@ -14,7 +14,7 @@ Le dataset utilisé est le suivant :
 https://www.kaggle.com/datasets/catherinerasgaitis/mxmh-survey-results
 
 
-# Problématique
+# Notre analyse
 
 Premièrement, nous avons décidés de choisir le temps moyen d'écoute par jour en fonction de l'âge dans notre dashboard car nous pensions que les personnes très jeunes ou très âgées écoutaient moins de musique que les personnes entre l'adolescence et la fin de l'âge active.
 De plus, le graphe du taux d'anxiété moyen en fonction du BPM a été choisi car nous voulions savoir si les personnes anxieuses écoutaient des musiques au tempo lent, rapide ou si cela n'avait aucun lien.
