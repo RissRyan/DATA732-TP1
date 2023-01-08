@@ -1,6 +1,6 @@
 # DATA 732 - PROJET
 
-Calvin Ngor, Jordan PRUVOST, Ryan RISS, Vincent TAKAHASHI. 
+Calvin NGOR, Jordan PRUVOST, Ryan RISS, Vincent TAKAHASHI. 
 
 Pour lancer le serveur
 
