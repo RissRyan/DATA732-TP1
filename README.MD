@@ -1,5 +1,7 @@
 # DATA 732 - PROJET
 
+Calvin Ngor, Jordan PRUVOST, Ryan RISS, Vincent TAKAHASHI. 
+
 Pour lancer le serveur
 
 ```shell
