@@ -26,5 +26,5 @@ Nous pouvons donc penser que la dépression et l'anxiété n'ont pas de corréla
 
 En outre, nous avons voulu savoir si le cliché des jeunes qui écoutent de la musique en travaillant était vrai ou non. Le graphe nous montre que oui mais il faut prendre en compte la surreprésentation des jeunes (moins de 30 ans) dans le dataset.
 
-Finalement, nous avons choisi de représenter la répartition des âges de cette base de données, car il semblait pertinent de savoir sur quel échantillon nous étudions nos données.
+Finalement, nous avons choisi de représenter la répartition des âges de cette base de données, car il semblait pertinent de savoir sur quel échantillon nous étudions nos données, de plus que nous savons qu'il y a une surreprésentation des moins de 30 ans dans le dataset.
 Cela nous permet d'avoir un regard plus critique sur le rendu de nos données.
