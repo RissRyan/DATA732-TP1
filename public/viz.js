@@ -225,6 +225,68 @@ async function createDataViz() {
     
         /* ===== FIN ANXIETE EN FONCTION DE L'AGE - ROW CHART ===== */
 
+        /* ===== XUE HUAAA PIAO PIAAAAOOO ===== */ 
+
+        const ageWorkWithMusicDimension = ndx.dimension(function (d){
+            return d["Age"] || 0;
+        });
+    
+    
+        const ageWorkWithMusicGroup = ageWorkWithMusicDimension.group().reduce((p,v) => {
+    
+            if (v["While working"]) {
+                p++;
+            }
+    
+            return p;
+        },
+            (p,v) => {
+    
+                if (v["While working"]) {
+                    p--;
+                }
+    
+                return p;
+            }, function () {
+                return 0
+            });
+    
+    console.log(ageWorkWithMusicGroup.top(Infinity))
+    
+        const ageWorkWithMusicChart = dc.lineChart('#ageWorkWithMusicChart', groupName)
+            .dimension(ageWorkWithMusicDimension)
+            .group(ageWorkWithMusicGroup)
+            //.renderLabel(true)
+            .renderTitle(true)
+            .ordering(function(p){
+            return -p.value;
+            })
+            .yAxisLabel("Working with music")
+            .xAxisLabel("Age")
+            .x(d3.scaleLinear().domain([10,80]))
+            .ordinalColors(['#264653', '#2a9d8f', '#e9c46a', '#f4a261', '#e76f51'])
+            .legend(dc.legend().highlightSelected(true).x(0).y(0))
+            .title(function (d){
+                return d.value
+            })
+
+    // Juste les ages
+
+    const ageGroup = AgeDimension.group().reduceCount();
+
+    const justAgeChart = new dc.BarChart('#justAgeChart', groupName)
+    .dimension(AgeDimension)
+    .group(ageGroup)
+    .elasticX(true) // On veut que l'axe des X puisse redimensionner tout seul
+    .ordering(function (p) { // On veut trier par valeur croissante
+        return -p.value;
+    })
+    .yAxisLabel("Count")
+    .xAxisLabel("Age")
+    //.valueAccessor(function(p) { return p.value.count > 0 ? p.value.total / p.value.count : 0; })
+    .x(d3.scaleLinear().domain([0, 90]))
+    .y(d3.scaleLinear().domain([0, 85]))
+    ;
     // On veut rendre tous les graphiques qui proviennent du chart group "dataset"
     dc.renderAll(groupName);
 }
